@@ -103,7 +103,7 @@ export function useFinanceReport(): FinanceHookResult {
       const doc = new jsPDF();
 
       doc.setFontSize(18);
-      doc.text("Project Clarias — Financial Report", 14, 20);
+      doc.text("Project Clarias - Financial Report", 14, 20);
 
       doc.setFontSize(10);
       doc.setTextColor(100);

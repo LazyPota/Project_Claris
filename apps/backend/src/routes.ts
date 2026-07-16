@@ -1,29 +1,28 @@
-import { adminProjectRouter } from "./admin/projects";
 import { adminUserRouter } from "./admin/users";
 import { HonoApp } from "./app";
 import { authRouter } from "./auth";
-import { bountyRouter } from "./bounty";
-import { leaderboardRouter } from "./leaderboard";
-import { marketRouter } from "./market";
+import { dashboardRouter } from "./features/dashboard/router";
+import { pondsRouter } from "./features/ponds/router";
+import { environmentRouter } from "./features/environment/router";
+import { feedingRouter } from "./features/feeding/router";
+import { harvestRouter } from "./features/harvest/router";
+import { analyticsRouter } from "./features/analytics/router";
+import { reportsRouter } from "./features/reports/router";
+import { alertsRouter } from "./features/alerts/router";
 import { meRouter } from "./me";
-import { projectsRouter } from "./projects";
-import { rsvpRouter } from "./rsvp";
-import { shopRouter } from "./shop";
 import { userRouter } from "./user";
-import { userProjectRouter } from "./user/projects";
 
 export const router = HonoApp()
   .route("/auth", authRouter)
-  .route("/rsvp", rsvpRouter)
   .route("/user", userRouter)
-  .route("/user/projects", userProjectRouter)
   .route("/admin/users", adminUserRouter)
-  .route("/admin/projects", adminProjectRouter)
   .route("/me", meRouter)
-  .route("/shop", shopRouter)
-  .route("/bounties", bountyRouter)
-  .route("/leaderboard", leaderboardRouter)
-  .route("/market", marketRouter)
-  .route("/projects", projectsRouter)
-  .route("/admin/users", adminUserRouter);
+  .route("/dashboard", dashboardRouter)
+  .route("/ponds", pondsRouter)
+  .route("/environment", environmentRouter)
+  .route("/feeding", feedingRouter)
+  .route("/harvest", harvestRouter)
+  .route("/analytics", analyticsRouter)
+  .route("/reports", reportsRouter)
+  .route("/alerts", alertsRouter);
 export type RouterRoutes = typeof router;

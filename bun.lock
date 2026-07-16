@@ -37,6 +37,7 @@
       "version": "0.1.0",
       "dependencies": {
         "@project-clarias/backend": "*",
+        "@project-clarias/env": "*",
         "@project-clarias/rpc": "*",
         "@supabase/ssr": "^0.12.0",
         "@supabase/supabase-js": "^2.108.1",

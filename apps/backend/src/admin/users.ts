@@ -1,7 +1,6 @@
 import { zValidator } from "@hono/zod-validator";
 import { db, eq } from "@project-clarias/database";
 import { logUser } from "@project-clarias/database/schema/audit-log";
-import { project } from "@project-clarias/database/schema/project";
 import { account } from "@project-clarias/database/schema/user";
 import type { UserInfo } from "@project-clarias/database/types/user.d";
 import z from "zod";
@@ -29,10 +28,6 @@ export const adminUserRouter = HonoApp()
         .from(account)
         .where(eq(account.id, id))
         .then(([user]) => user);
-      const projectData = await db
-        .select()
-        .from(project)
-        .where(eq(project.userId, id));
       const logData = await db
         .select()
         .from(logUser)
@@ -47,7 +42,6 @@ export const adminUserRouter = HonoApp()
         success: true,
         user: {
           ...userData,
-          project: projectData,
           logs: logData.sort(
             (a, b) =>
               new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
