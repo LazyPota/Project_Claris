@@ -12,6 +12,7 @@
   "dependencies": {
     "@base-ui/react": "^1.6.0",
     "@paper-design/shaders-react": "^0.0.77",
+    "@phosphor-icons/react": "^2.1.10",
     "@project-clarias/backend": "*",
     "@project-clarias/rpc": "*",
     "@radix-ui/react-separator": "^1.1.11",

@@ -25,10 +25,11 @@ import {
   TOP_LEVEL_SECTIONS,
 } from "@/constants/navigation";
 import { useIsMobile } from "@/hooks/use-mobile";
-import type { labs } from "@/lib/source";
+import { labs } from "@/lib/source";
 import { cn } from "@/lib/utils";
 
 export default function NavbarClient() {
+  const tree = labs.pageTree;
   const isMobile = useIsMobile({ breakpoint: 512 });
   const isInLabsBreakpoint = useIsMobile({ breakpoint: 1280 });
 
