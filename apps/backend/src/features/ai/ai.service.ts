@@ -277,7 +277,54 @@ export class AIService {
 
       return responseText;
     } catch (e) {
+      console.error("[AI Service] Daily summary generation error:", e);
       throw new Error(`AI Daily summary generation failed: ${e instanceof Error ? e.message : String(e)}`);
+    }
+  }
+
+  /**
+   * Health check endpoint logic
+   */
+  static async healthCheck() {
+    let openrouterReachable = false;
+    try {
+      const res = await fetch("https://openrouter.ai/api/v1/models", { signal: AbortSignal.timeout(5000) });
+      openrouterReachable = res.ok;
+    } catch (e) {
+      console.error("[AI Service] Health check reachability test failed:", e);
+    }
+
+    return {
+      provider: "openrouter",
+      model: DEFAULT_OPENROUTER_MODEL,
+      apiKeyLoaded: !!process.env.OPENROUTER_API_KEY,
+      sdkInitialized: !!openrouter,
+      openrouterReachable,
+    };
+  }
+
+  /**
+   * Test completion endpoint logic
+   */
+  static async testCompletion() {
+    try {
+      console.log("[AI Service] Testing OpenRouter completion with model:", DEFAULT_OPENROUTER_MODEL);
+      const completion = (await openrouter.chat.send({
+        chatRequest: {
+          model: DEFAULT_OPENROUTER_MODEL,
+          messages: [{ role: "user", content: "Say OK." }],
+        },
+      })) as any;
+
+      console.log("[AI Service] Received raw completion response:", JSON.stringify(completion));
+
+      return {
+        rawResponse: completion,
+        parsedResponse: completion.choices?.[0]?.message?.content || "",
+      };
+    } catch (e) {
+      console.error("[AI Service] Test completion failed:", e);
+      throw e;
     }
   }
 }

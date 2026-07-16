@@ -15,6 +15,32 @@ import type {
  */
 export class AIController {
   /**
+   * Temporary health check endpoint
+   */
+  static async health(c: Context<BackendEnv>) {
+    try {
+      const status = await AIService.healthCheck();
+      return c.json({ success: true, data: status });
+    } catch (e) {
+      console.error("[AI Controller] Health check failed:", e);
+      return c.json({ success: false, error: e instanceof Error ? e.message : String(e) }, 500);
+    }
+  }
+
+  /**
+   * Temporary test endpoint sending "Say OK."
+   */
+  static async test(c: Context<BackendEnv>) {
+    try {
+      const result = await AIService.testCompletion();
+      return c.json({ success: true, data: result });
+    } catch (e) {
+      console.error("[AI Controller] Test completion failed:", e);
+      return c.json({ success: false, error: e instanceof Error ? e.message : String(e) }, 500);
+    }
+  }
+
+  /**
    * Handles POST /ai/chat
    */
   static async chat(c: Context<BackendEnv>) {
@@ -24,6 +50,7 @@ export class AIController {
       const answer = await AIService.sendChat(body.pondId, body.question, account.id);
       return c.json({ success: true, data: { answer } });
     } catch (e) {
+      console.error("[AI Controller] Chat endpoint failed:", e);
       return c.json({ success: false, message: e instanceof Error ? e.message : "Chat failed" }, 500);
     }
   }
@@ -38,6 +65,7 @@ export class AIController {
       const result = await AIService.generateDashboardSummary(body.pondId, account.id);
       return c.json({ success: true, data: result });
     } catch (e) {
+      console.error("[AI Controller] Dashboard Summary endpoint failed:", e);
       return c.json({ success: false, message: e instanceof Error ? e.message : "Failed to generate dashboard summary" }, 500);
     }
   }
@@ -52,6 +80,7 @@ export class AIController {
       const recommendations = await AIService.generateRecommendations(body.pondId, account.id);
       return c.json({ success: true, data: { recommendations } });
     } catch (e) {
+      console.error("[AI Controller] Recommendations endpoint failed:", e);
       return c.json({ success: false, message: e instanceof Error ? e.message : "Failed to generate recommendations" }, 500);
     }
   }
@@ -66,6 +95,7 @@ export class AIController {
       const explanation = await AIService.explainChart(body.pondId, body.chart, body.history, account.id);
       return c.json({ success: true, data: { explanation } });
     } catch (e) {
+      console.error("[AI Controller] Explain Chart endpoint failed:", e);
       return c.json({ success: false, message: e instanceof Error ? e.message : "Failed to explain chart" }, 500);
     }
   }
@@ -80,6 +110,7 @@ export class AIController {
       const summary = await AIService.generateDailySummary(body.pondId, account.id);
       return c.json({ success: true, data: { summary } });
     } catch (e) {
+      console.error("[AI Controller] Daily Summary endpoint failed:", e);
       return c.json({ success: false, message: e instanceof Error ? e.message : "Failed to generate daily summary" }, 500);
     }
   }

@@ -14,6 +14,8 @@ import {
  * Hono router for Project Clarias AI endpoints.
  */
 export const aiRouter = HonoApp()
+  .get("/health", AIController.health)
+  .get("/test", AIController.test)
   .post("/chat", authMiddleware(), zValidator("json", chatInputSchema), AIController.chat)
   .post("/dashboard-summary", authMiddleware(), zValidator("json", dashboardInputSchema), AIController.dashboardSummary)
   .post("/recommendations", authMiddleware(), zValidator("json", recommendationsInputSchema), AIController.recommendations)
