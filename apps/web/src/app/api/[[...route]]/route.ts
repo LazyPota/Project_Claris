@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { app } from "@project-clarias/backend";
 export const GET = app.fetch;
 export const POST = app.fetch;

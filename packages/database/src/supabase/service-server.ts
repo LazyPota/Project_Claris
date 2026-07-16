@@ -9,9 +9,11 @@ import { createClient } from "@supabase/supabase-js";
  * This client should NEVER be used on the client side or exposed to users.
  */
 export const createServiceServer = () => {
+  const url = env.NEXT_PUBLIC_SUPABASE_URL || "https://placeholder.supabase.co";
+  const key = env.SUPABASE_DATABASE_SECRET_KEY || "placeholder-key";
   return createClient<Database>(
-    env.NEXT_PUBLIC_SUPABASE_URL,
-    env.SUPABASE_DATABASE_SECRET_KEY,
+    url,
+    key,
     {
       auth: {
         autoRefreshToken: false,
@@ -19,7 +21,7 @@ export const createServiceServer = () => {
       },
       global: {
         headers: {
-          Authorization: `Bearer ${env.SUPABASE_DATABASE_SECRET_KEY}`,
+          Authorization: `Bearer ${key}`,
         },
       },
     },

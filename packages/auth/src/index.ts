@@ -9,7 +9,8 @@ import { nextCookies } from "better-auth/next-js";
 import { userRegistration } from "./database";
 
 export const auth = betterAuth({
-  baseURL: env.NEXT_PUBLIC_APP_URL,
+  secret: env.BETTER_AUTH_SECRET || "placeholder-better-auth-secret-key-12345678",
+  baseURL: env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
   database: drizzleAdapter(db, {
     provider: "pg",
     schema,

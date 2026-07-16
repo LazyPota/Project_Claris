@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -11,34 +10,10 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import type { HarvestRecord } from "@/types/models";
-import { getHarvestStats } from "@/services/mock-data";
-
-interface ChartDatum {
-  date: string;
-  estimated: number;
-  actual: number;
-}
-
-function toChartData(records: HarvestRecord[]): ChartDatum[] {
-  return [...records]
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-    .map((r) => ({
-      date: r.date,
-      estimated: r.estimatedBiomassKg,
-      actual: r.actualYieldKg,
-    }));
-}
+import { useHarvestPrediction } from "@/hooks/use-harvest-prediction";
 
 export function BiomassChart() {
-  const [data, setData] = useState<ChartDatum[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    getHarvestStats()
-      .then((records) => setData(toChartData(records)))
-      .finally(() => setLoading(false));
-  }, []);
+  const { chartData: data, loading } = useHarvestPrediction();
 
   if (loading) {
     return <div className="text-sm text-neutral-500">Loading harvest data…</div>;

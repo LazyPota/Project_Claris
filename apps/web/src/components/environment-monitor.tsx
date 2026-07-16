@@ -1,20 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { AlertTriangle, Droplets, Thermometer, Waves } from "lucide-react";
-import type { EnvironmentData } from "@/types/models";
-import { getEnvironmentData } from "@/services/mock-data";
+import { useEnvironmentData } from "@/hooks/use-environment-data";
 import { cn } from "@/lib/utils";
 
 export function EnvironmentMonitor() {
-  const [data, setData] = useState<EnvironmentData | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    getEnvironmentData()
-      .then(setData)
-      .finally(() => setLoading(false));
-  }, []);
+  const { data, loading } = useEnvironmentData();
 
   if (loading) {
     return <div className="text-sm text-neutral-500">Loading sensor data…</div>;
