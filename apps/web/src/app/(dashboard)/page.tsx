@@ -51,14 +51,14 @@ export default function DashboardPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <Card className="relative overflow-hidden border-separator/10">
+            <Card className="relative flex flex-col overflow-hidden border-separator/10">
               <CardHeader className="pb-2">
-                <CardTitle className="flex items-center gap-2 font-mono text-[10px] text-muted-foreground uppercase tracking-wider">
+                <CardTitle className="flex items-center justify-center gap-2 font-mono text-[10px] text-muted-foreground uppercase tracking-wider text-center">
                   <HeartPulse className="h-3.5 w-3.5" />
                   Overall Health Score
                 </CardTitle>
               </CardHeader>
-              <CardContent className="flex flex-col items-center justify-center pt-2 pb-6">
+              <CardContent className="flex flex-1 flex-col items-center justify-center pt-2 pb-6 text-center">
                 <div className="text-6xl font-bold font-montreal tracking-tight text-indigo-600">{healthScore}</div>
                 <span className="mt-1 font-mono text-[10px] text-muted-foreground uppercase tracking-wider">/ 100</span>
               </CardContent>

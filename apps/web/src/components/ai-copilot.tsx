@@ -7,19 +7,19 @@ import { AlertCircle, Bot, BrainCircuit, Loader2, MessageSquare, Sparkles } from
 export function SimpleMarkdown({ content }: { content: string }) {
   const lines = content.split("\n");
   return (
-    <div className="space-y-1 text-sm text-neutral-700 dark:text-neutral-300">
+    <div className="space-y-1 text-sm text-neutral-700 ">
       {lines.map((line, idx) => {
         const clean = line.trim();
         if (clean.startsWith("###")) {
           return (
-            <h4 key={idx} className="font-semibold text-neutral-900 dark:text-neutral-100 mt-2">
+            <h4 key={idx} className="font-semibold text-neutral-900  mt-2">
               {clean.replace("###", "").trim()}
             </h4>
           );
         }
         if (clean.startsWith("##")) {
           return (
-            <h3 key={idx} className="text-base font-semibold text-neutral-900 dark:text-neutral-100 mt-3">
+            <h3 key={idx} className="text-base font-semibold text-neutral-900  mt-3">
               {clean.replace("##", "").trim()}
             </h3>
           );
@@ -37,7 +37,7 @@ export function SimpleMarkdown({ content }: { content: string }) {
           <p key={idx}>
             {parts.map((part, i) =>
               i % 2 === 1 ? (
-                <strong key={i} className="font-semibold text-neutral-950 dark:text-neutral-50">
+                <strong key={i} className="font-semibold text-neutral-950 ">
                   {part}
                 </strong>
               ) : (
@@ -180,7 +180,7 @@ export function AICopilotSection() {
 
   if (error) {
     return (
-      <div className="flex items-center gap-2 rounded-md border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-900/30 dark:bg-red-950/20 dark:text-red-400">
+      <div className="flex items-center gap-2 rounded-md border border-red-200 bg-red-50 p-4 text-sm text-red-700   ">
         <AlertCircle className="h-5 w-5 shrink-0" />
         <span>{error}</span>
       </div>
@@ -191,25 +191,25 @@ export function AICopilotSection() {
     <div className="space-y-6">
       {/* 1. Main AI Copilot Overview Card */}
       {dashboardSummary && (
-        <div className="rounded-lg border border-indigo-200 bg-indigo-50/30 p-6 dark:border-indigo-900/30 dark:bg-indigo-950/10">
+        <div className="rounded-lg border border-indigo-200 bg-indigo-50/30 p-6  ">
           <div className="flex items-start justify-between gap-4">
             <div className="flex items-center gap-2">
-              <BrainCircuit className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
-              <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50">
+              <BrainCircuit className="h-6 w-6 text-indigo-600 " />
+              <h2 className="text-lg font-semibold text-neutral-900 ">
                 Project Clarias AI Copilot
               </h2>
             </div>
             <div className="flex items-center gap-4">
               <div className="text-right">
                 <span className="text-xs uppercase tracking-wide text-neutral-500">Pond Health</span>
-                <p className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
+                <p className="text-2xl font-bold text-indigo-600 ">
                   {dashboardSummary.healthScore}%
                 </p>
               </div>
-              <div className="h-8 w-px bg-neutral-200 dark:bg-neutral-800" />
+              <div className="h-8 w-px bg-neutral-200 " />
               <div className="text-right">
                 <span className="text-xs uppercase tracking-wide text-neutral-500">Confidence</span>
-                <p className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+                <p className="text-sm font-semibold text-neutral-700 ">
                   {dashboardSummary.confidence}%
                 </p>
               </div>
@@ -217,21 +217,21 @@ export function AICopilotSection() {
           </div>
 
           <div className="mt-4 space-y-2">
-            <p className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
+            <p className="text-sm font-semibold text-neutral-800 ">
               "{dashboardSummary.headline}"
             </p>
-            <p className="text-sm text-neutral-600 dark:text-neutral-400">
+            <p className="text-sm text-neutral-600 ">
               {dashboardSummary.summary}
             </p>
           </div>
 
           {dashboardSummary.recommendations?.length > 0 && (
-            <div className="mt-4 rounded-md bg-white p-4 shadow-sm border border-neutral-100 dark:bg-neutral-900 dark:border-neutral-800">
-              <div className="flex items-center gap-2 text-xs font-semibold text-indigo-600 uppercase tracking-wide dark:text-indigo-400">
+            <div className="mt-4 rounded-md bg-white p-4 shadow-sm border border-neutral-100  ">
+              <div className="flex items-center gap-2 text-xs font-semibold text-indigo-600 uppercase tracking-wide ">
                 <Sparkles className="h-4.5 w-4.5" />
                 <span>Top Recommendation</span>
               </div>
-              <p className="mt-1 text-sm text-neutral-800 dark:text-neutral-200">
+              <p className="mt-1 text-sm text-neutral-800 ">
                 {dashboardSummary.recommendations[0]}
               </p>
             </div>
@@ -243,7 +243,7 @@ export function AICopilotSection() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
 
         {/* Daily Summary */}
-        <div className="rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900">
+        <div className="rounded-lg border border-neutral-200 bg-white p-5  ">
           <h3 className="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-3">
             Today's Summary
           </h3>
@@ -255,14 +255,14 @@ export function AICopilotSection() {
         </div>
 
         {/* Bullet Recommendations List */}
-        <div className="rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900">
+        <div className="rounded-lg border border-neutral-200 bg-white p-5  ">
           <h3 className="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-3">
             Pond Actions
           </h3>
           {recommendations.length > 0 ? (
             <ul className="space-y-2">
               {recommendations.map((rec, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-neutral-700 dark:text-neutral-300">
+                <li key={i} className="flex items-start gap-2 text-sm text-neutral-700 ">
                   <span className="text-indigo-500 font-bold shrink-0">•</span>
                   <span>{rec}</span>
                 </li>
@@ -274,7 +274,7 @@ export function AICopilotSection() {
         </div>
 
         {/* Ask AI Panel */}
-        <div className="rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900 flex flex-col justify-between">
+        <div className="rounded-lg border border-neutral-200 bg-white p-5   flex flex-col justify-between">
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-3 flex items-center gap-1.5">
               <Bot className="h-4.5 w-4.5 text-indigo-500" />
@@ -286,7 +286,7 @@ export function AICopilotSection() {
                 value={chatQuestion}
                 onChange={(e) => setChatQuestion(e.target.value)}
                 placeholder="Ask anything about your pond..."
-                className="w-full min-h-[80px] rounded-md border border-neutral-200 p-2.5 text-sm outline-none focus:border-indigo-500 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50"
+                className="w-full min-h-[80px] rounded-md border border-neutral-200 p-2.5 text-sm outline-none focus:border-indigo-500   "
               />
               <button
                 type="submit"
@@ -309,7 +309,7 @@ export function AICopilotSection() {
           </div>
 
           {chatAnswer && (
-            <div className="mt-4 rounded-md border border-neutral-100 bg-neutral-50/50 p-3.5 dark:border-neutral-800 dark:bg-neutral-950/20 max-h-[180px] overflow-y-auto">
+            <div className="mt-4 rounded-md border border-neutral-100 bg-neutral-50/50 p-3.5   max-h-[180px] overflow-y-auto">
               <SimpleMarkdown content={chatAnswer} />
             </div>
           )}

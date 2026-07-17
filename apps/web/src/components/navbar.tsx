@@ -67,7 +67,7 @@ export default function NavbarClient() {
           style={{ filter: "blur(clamp(200px, 10vw, 250px))" }}
         >
           <span
-            className="absolute top-0 right-0 left-0 m-0 mx-auto h-[25vh] w-[90vw] bg-[#1D1EF0] p-0 sm:h-[15vh] md:h-[10vh] md:w-[80vw] dark:bg-[#6964ED]/80"
+            className="absolute top-0 right-0 left-0 m-0 mx-auto h-[25vh] w-[90vw] bg-[#1D1EF0] p-0 sm:h-[15vh] md:h-[10vh] md:w-[80vw] "
             style={{
               clipPath: "polygon(0% 51%, 50% 0%, 100% 51%, 100% 100%, 0% 100%)",
             }}

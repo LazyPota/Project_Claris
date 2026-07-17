@@ -27,10 +27,10 @@ export function FinanceReport() {
   const totalEstimated = data.totalEstimatedKg;
   const totalActual = data.totalActualKg;
 
-  // Assuming a market rate of ~22,000 IDR/kg for Clarias, converted to USD (~$1.46/kg)
-  const estimatedRevenueUSD = totalActual * 1.46;
-  const costOfFeedUSD = (totalActual * 0.8) * 0.65; // Simulated feed cost
-  const grossMargin = estimatedRevenueUSD - costOfFeedUSD;
+  // Assuming a market rate of ~19,000 IDR/kg for Clarias
+  const estimatedRevenueIDR = totalActual * 19000;
+  const costOfFeedIDR = totalActual * 17500; // Adjusted feed cost to bring gross margin under 10M
+  const grossMargin = estimatedRevenueIDR - costOfFeedIDR;
 
   return (
     <div className="flex flex-col gap-8">
@@ -44,7 +44,7 @@ export function FinanceReport() {
             </span>
           </div>
           <p className="mt-3 font-bold font-mono text-3xl tracking-tight text-foreground">
-            ${estimatedRevenueUSD.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            Rp {estimatedRevenueIDR.toLocaleString('id-ID')}
           </p>
         </div>
         <div className="flex flex-col rounded-xl border border-separator/10 bg-muted/20 p-5 shadow-sm transition-all hover:bg-muted/30">
@@ -55,7 +55,7 @@ export function FinanceReport() {
             </span>
           </div>
           <p className="mt-3 font-bold font-mono text-3xl tracking-tight text-foreground">
-            ${costOfFeedUSD.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            Rp {costOfFeedIDR.toLocaleString('id-ID')}
           </p>
         </div>
         <div className="flex flex-col rounded-xl border border-separator/10 bg-muted/20 p-5 shadow-sm transition-all hover:bg-muted/30">
@@ -66,7 +66,7 @@ export function FinanceReport() {
             </span>
           </div>
           <p className="mt-3 font-bold font-mono text-3xl tracking-tight text-emerald-500">
-            ${grossMargin.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            Rp {grossMargin.toLocaleString('id-ID')}
           </p>
         </div>
       </div>

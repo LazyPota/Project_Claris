@@ -311,7 +311,7 @@ export default function LandingPage() {
                   </div>
 
                   {simulateAlert && (
-                    <div className="flex items-center gap-2 rounded border border-red-200 bg-red-50 p-2 font-mono font-semibold text-[10px] text-red-800 uppercase dark:border-red-900 dark:bg-red-950 dark:text-red-200">
+                    <div className="flex items-center gap-2 rounded border border-red-200 bg-red-50 p-2 font-mono font-semibold text-[10px] text-red-800 uppercase   ">
                       <AlertTriangle className="h-3 w-3 shrink-0 animate-bounce" />
                       DO Critical Parameter Alert Triggered
                     </div>
@@ -322,7 +322,7 @@ export default function LandingPage() {
                       className={cn(
                         "rounded border p-3 transition duration-300",
                         simulateAlert
-                          ? "border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/30"
+                          ? "border-red-200 bg-red-50  "
                           : "border-separator/10 bg-background",
                       )}
                     >
@@ -343,7 +343,7 @@ export default function LandingPage() {
                       className={cn(
                         "rounded border p-3 transition duration-300",
                         simulateAlert
-                          ? "border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/30"
+                          ? "border-red-200 bg-red-50  "
                           : "border-separator/10 bg-background",
                       )}
                     >
@@ -791,7 +791,7 @@ export default function LandingPage() {
               <span className="font-bold font-montreal text-foreground/80 text-lg">
                 App
               </span>
-              <nav className="flex flex-col gap-1 font-medium font-mono text-blue-600 text-sm transition-all *:hover:underline dark:text-blue-400">
+              <nav className="flex flex-col gap-1 font-medium font-mono text-blue-600 text-sm transition-all *:hover:underline ">
                 <Link href="/">[dashboard]</Link>
                 <Link href="/environment">[environment]</Link>
                 <Link href="/harvest">[harvests]</Link>
@@ -802,7 +802,7 @@ export default function LandingPage() {
               <span className="font-bold font-montreal text-foreground/80 text-lg">
                 Meta
               </span>
-              <nav className="flex flex-col gap-1 font-medium font-mono text-blue-600 text-sm transition-all *:hover:underline dark:text-blue-400">
+              <nav className="flex flex-col gap-1 font-medium font-mono text-blue-600 text-sm transition-all *:hover:underline ">
                 <Link href="/home">[home]</Link>
               </nav>
             </div>
