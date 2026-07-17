@@ -17,29 +17,25 @@ export const authMiddleware =
     let sessionObj: any;
 
     if (!session) {
-      // Auto-authenticate as the seeded test user in development mode
-      if (process.env.NODE_ENV !== "production") {
-        userId = "test-user-id-123";
-        sessionObj = {
-          id: "mock-session-id",
-          userId: "test-user-id-123",
-          token: "mock-token",
-          expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        };
-        c.set("user", {
-          id: "test-user-id-123",
-          email: "miftasigma11@gmail.com",
-          name: "Mifta",
-          emailVerified: true,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        });
-        c.set("session", sessionObj);
-      } else {
-        return c.json({ success: false, message: "not-logged-in" });
-      }
+      // Fall back to the seeded guest/demo user when no session exists
+      userId = "test-user-id-123";
+      sessionObj = {
+        id: "mock-session-id",
+        userId: "test-user-id-123",
+        token: "mock-token",
+        expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      c.set("user", {
+        id: "test-user-id-123",
+        email: "miftasigma11@gmail.com",
+        name: "Mifta",
+        emailVerified: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
+      c.set("session", sessionObj);
     } else {
       userId = session.user.id;
       sessionObj = session.session;

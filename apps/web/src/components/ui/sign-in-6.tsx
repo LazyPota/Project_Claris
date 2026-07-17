@@ -13,7 +13,6 @@ export function SignIn6() {
   function handleGuest() {
     document.cookie = "clarias-auth=guest; path=/; max-age=86400";
     window.location.href = "/";
-    window.location.reload();
   }
 
   function handleIoT() {
