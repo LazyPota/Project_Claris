@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { SidebarNav } from "@/components/sidebar-nav";
+import { HardwareStatusIndicator } from "@/components/hardware-status-indicator";
 
 export function DashboardShell({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -25,15 +26,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
         </div>
         <SidebarNav />
         <div className="border-separator/10 border-t p-4">
-          <div className="flex items-center gap-2 rounded-md border border-separator/10 bg-background/60 px-3 py-2 backdrop-blur-sm">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-            </span>
-            <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider">
-              Systems Nominal
-            </span>
-          </div>
+          <HardwareStatusIndicator />
         </div>
       </aside>
 

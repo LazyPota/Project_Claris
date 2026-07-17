@@ -1,0 +1,87 @@
+#include <Arduino.h>
+#include <ESP8266WiFi.h>
+
+const int POND_ID = 1;
+const unsigned long SEND_INTERVAL_MS = 5000;
+const int BAUD_RATE = 115200;
+const int LED_PIN = LED_BUILTIN;
+
+unsigned long lastSendTime = 0;
+
+float readDissolvedOxygen() {
+  float base = 7.2;
+  float noise = (random(-30, 30)) / 100.0;
+  return base + noise;
+}
+
+float readPH() {
+  float base = 7.0;
+  float noise = (random(-20, 20)) / 100.0;
+  return base + noise;
+}
+
+float readWaterLevel() {
+  float base = 85.0;
+  float noise = (random(-50, 50)) / 100.0;
+  return base + noise;
+}
+
+float readTemperature() {
+  float base = 28.5;
+  float noise = (random(-100, 100)) / 100.0;
+  return base + noise;
+}
+
+bool checkAlert(float dO, float pH, float temp) {
+  if (dO < 4.0 || dO > 12.0) return true;
+  if (pH < 6.0 || pH > 9.0) return true;
+  if (temp < 20.0 || temp > 35.0) return true;
+  return false;
+}
+
+void blinkLED() {
+  digitalWrite(LED_PIN, LOW);
+  delay(50);
+  digitalWrite(LED_PIN, HIGH);
+}
+
+void setup() {
+  WiFi.persistent(false);
+  WiFi.mode(WIFI_OFF);
+  WiFi.forceSleepBegin();
+  delay(1);
+
+  Serial.begin(BAUD_RATE);
+  pinMode(LED_PIN, OUTPUT);
+  digitalWrite(LED_PIN, HIGH);
+  randomSeed(analogRead(0));
+
+  delay(2000);
+  Serial.println("{\"boot\":\"Project Clarias ESP8266 Sensor Node v1.0\"}");
+}
+
+void loop() {
+  unsigned long now = millis();
+
+  if (now - lastSendTime >= SEND_INTERVAL_MS) {
+    lastSendTime = now;
+
+    float dO = readDissolvedOxygen();
+    float pH = readPH();
+    float waterLevel = readWaterLevel();
+    float temp = readTemperature();
+    bool hasAlert = checkAlert(dO, pH, temp);
+
+    String json = "{";
+    json += "\"pondId\":" + String(POND_ID) + ",";
+    json += "\"dissolvedOxygen\":" + String(dO, 2) + ",";
+    json += "\"pH\":" + String(pH, 2) + ",";
+    json += "\"waterLevel\":" + String(waterLevel, 2) + ",";
+    json += "\"temperature\":" + String(temp, 2) + ",";
+    json += "\"hasAlert\":" + String(hasAlert ? "true" : "false");
+    json += "}";
+
+    Serial.println(json);
+    blinkLED();
+  }
+}

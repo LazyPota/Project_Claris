@@ -10,6 +10,7 @@ import { analyticsRouter } from "./features/analytics/router";
 import { reportsRouter } from "./features/reports/router";
 import { alertsRouter } from "./features/alerts/router";
 import { aiRouter } from "./features/ai";
+import { statusRouter } from "./features/status/router";
 import { meRouter } from "./me";
 import { userRouter } from "./user";
 
@@ -26,5 +27,6 @@ export const router = HonoApp()
   .route("/analytics", analyticsRouter)
   .route("/reports", reportsRouter)
   .route("/alerts", alertsRouter)
-  .route("/ai", aiRouter);
+  .route("/ai", aiRouter)
+  .route("/status", statusRouter);
 export type RouterRoutes = typeof router;
